@@ -1,4 +1,6 @@
 import { useData } from "./provider.js";
+import { shuffleAnswers } from "./provider.js";
+import { getAllAnswers } from "./provider.js";
 
 const welcomeScreen = document.getElementById("welcome");
 const startButton = document.getElementById("start-btn");
@@ -9,8 +11,9 @@ const questionElement = document.getElementById("question");
 const answerButtonsElement = document.getElementById("answer-buttons");
 const answerStatus = document.getElementById("answerStatus");
 
-let shuffledQuestions, currentQuestionIndex;
-let score = 0;
+let shuffledQuestions= []
+let currentQuestionIndex=0
+let score = 0
 
 startButton.addEventListener("click", startGame);
 nextButton.addEventListener("click", () => {
@@ -20,15 +23,21 @@ nextButton.addEventListener("click", () => {
 });
 const data = useData();
 
-function startGame() {
-  startButton.classList.add("hide");
-  scoreButton.classList.add("hide");
-  welcomeScreen.classList.add("hide");
-  answerStatus.classList.add("hide");
+const addClass = (variableName) => {
+  variableName.classList.add("hide");
+};
+const removeClass = (variableName) => {
+  variableName.classList.remove("hide");
+};
 
+function startGame() {
+  addClass(startButton);
+  addClass(scoreButton);
+  addClass(welcomeScreen);
+  addClass(answerStatus);
   shuffledQuestions = data.sort(() => Math.random() - 0.5);
   currentQuestionIndex = 0;
-  questionContainerElement.classList.remove("hide");
+  removeClass(questionContainerElement);
   setNextQuestion();
 }
 
@@ -37,14 +46,12 @@ function setNextQuestion() {
   showQuestion(shuffledQuestions[currentQuestionIndex]);
 }
 
+
+
 function showQuestion(question) {
   questionElement.innerText = question.question;
-  let allAnswers = [];
-  const inCorrectArray = question.incorrect.filter((ran) => ran);
-  inCorrectArray.push(question.correct);
-  allAnswers.push(inCorrectArray);
-  const allAnswersFlat = allAnswers.flat();
-  const shuffleAllAnswers = allAnswersFlat.sort(() => Math.random() - 0.5);
+  const allAnswers= getAllAnswers(question)
+  const shuffleAllAnswers = shuffleAnswers(allAnswers);
 
   for (let i = 0; i < shuffleAllAnswers.length; i++) {
     const button = document.createElement("button");
@@ -61,7 +68,7 @@ function showQuestion(question) {
 
 function resetState() {
   clearStatusClass(document.body);
-  nextButton.classList.add("hide");
+  addClass(nextButton);
   while (answerButtonsElement.firstChild) {
     answerButtonsElement.removeChild(answerButtonsElement.firstChild);
   }
@@ -74,30 +81,31 @@ function selectAnswer(e) {
     score++;
     console.log(score);
     answerStatus.innerText = "Correct Answer! Good Job!";
-    answerStatus.classList.remove("hide");
   } else {
     answerStatus.innerText =
       "Incorrect Answer. You should do better! Shame on you!";
-    answerStatus.classList.remove("hide");
   }
+  removeClass(answerStatus);
+
   setStatusClass(document.body, correct);
   Array.from(answerButtonsElement.children).forEach((button) => {
     setStatusClass(button, button.dataset.correct);
   });
   if (shuffledQuestions.length > currentQuestionIndex + 1) {
-    nextButton.classList.remove("hide");
+    removeClass(nextButton);
   } else {
     startButton.innerText = "Restart";
     scoreButton.innerText = getScore();
-    scoreButton.classList.remove("hide");
-    startButton.classList.remove("hide");
-    welcomeScreen.classList.add("hide");
+    removeClass(scoreButton);
+    removeClass(startButton);
+    addClass(welcomeScreen);
   }
 }
 
 function getScore() {
   return `Your total score: ${(score / 10) * 100}%`;
 }
+
 function setStatusClass(element, correct) {
   clearStatusClass(element);
   if (correct) {

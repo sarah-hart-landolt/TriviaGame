@@ -138,3 +138,16 @@ for (let i = 0; i < 10; i++) {
 }
 
 export const useData = () => randomArray.slice();
+
+export const getAllAnswers = (triviaObject) => {
+  let allAnswers = [];
+  var inCorrectArray = triviaObject.incorrect.filter((incorrect) => incorrect);
+  inCorrectArray.push(triviaObject.correct);
+  allAnswers.push(inCorrectArray);
+  const allAnswersFlat = allAnswers.flat();
+  return allAnswersFlat;
+};
+
+export const shuffleAnswers = (answerArray) => {
+  return answerArray.sort(() => Math.random() - 0.5);
+};
