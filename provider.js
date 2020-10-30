@@ -33,5 +33,14 @@ export const getAllAnswers = (triviaObject) => {
   return answerArray.sort(() => Math.random() - 0.5);
 };
 
+export const tenRandomTriviaItems = (originalArray, newRandomArray)=> {
+  for (let i = 0; i < 10; i++) {
+    const random_index = [Math.floor(Math.random() * originalArray.length)];
+    const randomData = originalArray[random_index];
+    newRandomArray.push(randomData);
+    originalArray.splice(random_index, 1);
+  }
+}
+
 
 

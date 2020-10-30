@@ -2,8 +2,6 @@ const getAllAnswers = require('./testFunctions')
 const shuffleAnswers = require('./testFunctions')
 
 
-
-
 const triviaItem1 = {
   question: "What was Tandem previous name?",
   incorrect: ["Tandem", "Burger Shack", "Extraordinary Humans"],
