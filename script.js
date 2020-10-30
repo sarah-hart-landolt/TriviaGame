@@ -1,4 +1,4 @@
-import { useData } from "./provider.js";
+import { useData, getData } from "./provider.js";
 import { shuffleAnswers } from "./provider.js";
 import { getAllAnswers } from "./provider.js";
 
@@ -15,13 +15,26 @@ let shuffledQuestions= []
 let currentQuestionIndex=0
 let score = 0
 
+getData().then(()=> {
+  const data = useData();
+
+  let randomArray = [];
+
+  for (let i = 0; i < 10; i++) {
+    const random_index = [Math.floor(Math.random() * data.length)];
+    const randomData = data[random_index];
+    randomArray.push(randomData);
+    data.splice(random_index, 1);
+  }
+
 startButton.addEventListener("click", startGame);
 nextButton.addEventListener("click", () => {
   currentQuestionIndex++;
   setNextQuestion();
   answerStatus.classList.add("hide");
 });
-const data = useData();
+
+
 
 const addClass = (variableName) => {
   variableName.classList.add("hide");
@@ -35,7 +48,7 @@ function startGame() {
   addClass(scoreButton);
   addClass(welcomeScreen);
   addClass(answerStatus);
-  shuffledQuestions = data.sort(() => Math.random() - 0.5);
+  shuffledQuestions = randomArray.sort(() => Math.random() - 0.5);
   currentQuestionIndex = 0;
   removeClass(questionContainerElement);
   setNextQuestion();
@@ -119,3 +132,5 @@ function clearStatusClass(element) {
   element.classList.remove("correct");
   element.classList.remove("wrong");
 }
+
+})
