@@ -1,33 +1,27 @@
 import {
   useData,
   getData,
-  shuffleAnswers,
-  getAllAnswers,
-  tenRandomTriviaItems,
+  tenRandomTriviaItems
 } from "./provider.js";
 
+import {triviaItem} from "./triviaItem.js"
+
 import {alert} from "./alert.js"
+
+import {hide, show,setStatusClass, resetState } from "./classHelpers.js"
 
 const welcomeScreen = document.getElementById("welcome");
 const startButton = document.getElementById("start-btn");
 const scoreButton = document.getElementById("score");
 const nextButton = document.getElementById("next-btn");
 const questionContainerElement = document.getElementById("question-container");
-const questionElement = document.getElementById("question");
 const counterElement = document.getElementById("counter");
 const answerButtonsElement = document.getElementById("answer-buttons");
 const answerStatus = document.getElementById("answerStatus");
 
-const hide = (variableName) => {
-  variableName.classList.add("hide");
-};
-const show = (variableName) => {
-  variableName.classList.remove("hide");
-};
 
-
-let shuffledQuestions = [];
-let currentQuestionIndex, score, counter ;
+let shuffledTriviaItems = [];
+let currentTriviaItemIndex, score, counter ;
 
 
 getData().then(() => {
@@ -39,7 +33,7 @@ getData().then(() => {
 
   startButton.addEventListener("click", startGame);
   nextButton.addEventListener("click", () => {
-    currentQuestionIndex++;
+    currentTriviaItemIndex++;
     counter++
     setNextQuestion();
     answerStatus.classList.add("hide");
@@ -51,8 +45,8 @@ getData().then(() => {
     hide(scoreButton);
     hide(welcomeScreen);
     hide(answerStatus);
-    shuffledQuestions = randomArray.sort(() => Math.random() - 0.5);
-    currentQuestionIndex = 0;
+    shuffledTriviaItems = randomArray.sort(() => Math.random() - 0.5);
+    currentTriviaItemIndex = 0;
     score = 0;
     counter = 1;
     show(questionContainerElement);
@@ -60,43 +54,20 @@ getData().then(() => {
   }
 
   function setNextQuestion() {
-    resetState();
-    showQuestion(shuffledQuestions[currentQuestionIndex]);
+    resetState(nextButton, answerButtonsElement);
+    showQuestion(shuffledTriviaItems[currentTriviaItemIndex]);
   }
 
   function showQuestion(question) {
-    questionElement.innerText = question.question;
     counterElement.innerText= `Question ${counter}/10`;
-    const allAnswers = getAllAnswers(question);
-    const shuffleAllAnswers = shuffleAnswers(allAnswers);
-
-    for (let i = 0; i < shuffleAllAnswers.length; i++) {
-      const button = document.createElement("button");
-      button.innerText = shuffleAllAnswers[i];
-      console.log(shuffleAllAnswers[i]);
-      button.classList.add("btn");
-      if (shuffleAllAnswers[i] === question.correct) {
-        button.dataset.correct = shuffleAllAnswers[i];
-      }
-      button.addEventListener("click", selectAnswer);
-      answerButtonsElement.appendChild(button);
-    }
+      triviaItem(question)
+      answerButtonsElement.addEventListener("click", selectAnswer);
   }
 
-  function resetState() {
-    clearStatusClass(document.body);
-    hide(nextButton);
-    while (answerButtonsElement.firstChild) {
-      answerButtonsElement.removeChild(answerButtonsElement.firstChild);
-    }
-  }
 
   function selectAnswer(e) {
     const selectedButton = e.target;
-    const correct = selectedButton.dataset.correct;
-    Array.from(answerButtonsElement.children).forEach((button) => {
-      button.disabled = true
-    });
+    const correct = selectedButton.classList.contains("yes")
 
     if (correct) {
       score++;
@@ -104,15 +75,17 @@ getData().then(() => {
       answerStatus.innerHTML = alert("correct");
     } else {
       selectedButton.classList.add("shake");
+
       answerStatus.innerHTML = alert("incorrect");
     }
     show(answerStatus);
 
-    setStatusClass(document.body, correct);
     Array.from(answerButtonsElement.children).forEach((button) => {
-      setStatusClass(button, button.dataset.correct);
+      setStatusClass(button);
+      button.disabled = true
+
     });
-    if (shuffledQuestions.length > currentQuestionIndex + 1) {
+    if (shuffledTriviaItems.length > currentTriviaItemIndex + 1) {
       show(nextButton);
     } else {
       startButton.innerText = "Restart";
@@ -127,17 +100,5 @@ getData().then(() => {
     return `Your total score: ${(number / 10) * 100}%`;
   }
 
-  function setStatusClass(element, correct) {
-    clearStatusClass(element);
-    if (correct) {
-      element.classList.add("correct");
-    } else {
-      element.classList.add("wrong");
-    }
-  }
-
-  function clearStatusClass(element) {
-    element.classList.remove("correct");
-    element.classList.remove("wrong");
-  }
+ 
 });
