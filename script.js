@@ -15,9 +15,12 @@ const questionElement = document.getElementById("question");
 const counterElement = document.getElementById("counter");
 const answerButtonsElement = document.getElementById("answer-buttons");
 const answerStatus = document.getElementById("answerStatus");
+const img= "https://images.squarespace-cdn.com/content/v1/53d8799de4b0873b56402a1e/1559931009629-ZCSE1FI8ND2P026OM8N8/ke17ZwdGBToddI8pDm48kAx672TVZdoJFcgHFa0Fgil7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0kMlYkjvFlctRdmAM11rxFSGHCfTYI-s7LnXwRZty7HxXSqouQeTz_nGqpH0fE6vjA/proud.jpeg"
+
 
 let shuffledQuestions = [];
 let currentQuestionIndex, score, counter ;
+
 
 getData().then(() => {
   const data = useData();
@@ -97,7 +100,9 @@ getData().then(() => {
       score++;
       console.log(score);
       answerStatus.innerText = "Correct Answer! Good Job!";
+
     } else {
+      selectedButton.classList.add("shake")
       answerStatus.innerText =
         "Incorrect Answer. You should do better! Shame on you!";
     }

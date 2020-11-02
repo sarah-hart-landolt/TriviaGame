@@ -4,5 +4,8 @@
   },
   "devDependencies": {
     "jest": "^26.6.1"
+  },
+  "dependencies": {
+    "milligram": "^1.4.1"
   }
 }

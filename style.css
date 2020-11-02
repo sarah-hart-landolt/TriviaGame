@@ -1,15 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300&display=swap'); */
 *, *::before, *::after {
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
     font-size: large; 
     text-align: center;
+    color:hsl(19, 28%, 25%);
   }
   
   :root {
-    --hue-neutral: 298;
-    --hue-wrong: 391;
-    --hue-correct: 173;
+    --hue-neutral: 010;
+    --hue-wrong: 724;
+    --hue-correct: 522;
   }
   
   body {
@@ -21,32 +22,36 @@
     height: 100vh;
     justify-content: center;
     align-items: center;
-    background-color: hsl(var(--hue), 100%, 40%);
+    background-color: hsl(var(--hue), 54%, 74%)
 
   }
   
   body.correct {
-    /* --hue: var(--hue-correct); */
-    background-image: url("https://images.squarespace-cdn.com/content/v1/53d8799de4b0873b56402a1e/1559931009629-ZCSE1FI8ND2P026OM8N8/ke17ZwdGBToddI8pDm48kAx672TVZdoJFcgHFa0Fgil7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0kMlYkjvFlctRdmAM11rxFSGHCfTYI-s7LnXwRZty7HxXSqouQeTz_nGqpH0fE6vjA/proud.jpeg");
-    background-size: 100% 170%;
+    --hue: var(--hue-correct);
+    /* background-image: url("https://images.squarespace-cdn.com/content/v1/53d8799de4b0873b56402a1e/1559931009629-ZCSE1FI8ND2P026OM8N8/ke17ZwdGBToddI8pDm48kAx672TVZdoJFcgHFa0Fgil7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0kMlYkjvFlctRdmAM11rxFSGHCfTYI-s7LnXwRZty7HxXSqouQeTz_nGqpH0fE6vjA/proud.jpeg"); */
     background-repeat: no-repeat;
     background-position: center;
   }
   
   body.wrong {
-    /* --hue: var(--hue-wrong); */
-    background-image: url("https://images.squarespace-cdn.com/content/v1/53d8799de4b0873b56402a1e/1556571949821-UZGUR8J68755P13FMO6F/ke17ZwdGBToddI8pDm48kCfpR91gd0Zp_Hpwm24XxUx7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0jRb3i7UjwNNySrgFE_nWasbbBmYVGzhuKHDfamr_3OblfqdBITEnO9zGuGn4Foqnw/frustrated+5.jpeg");
-    background-size: 100% 170%;
+    --hue: var(--hue-wrong);
+    /* background-image: url("https://images.squarespace-cdn.com/content/v1/53d8799de4b0873b56402a1e/1556571949821-UZGUR8J68755P13FMO6F/ke17ZwdGBToddI8pDm48kCfpR91gd0Zp_Hpwm24XxUx7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0jRb3i7UjwNNySrgFE_nWasbbBmYVGzhuKHDfamr_3OblfqdBITEnO9zGuGn4Foqnw/frustrated+5.jpeg"); */
     background-repeat: no-repeat;
+    background-position: center;
+
   }
   
   .container {
-    width: 500px;
+    width: 600px;
     max-width: 80%;
     background-color: white;
     border-radius: 5px;
-    padding: 10px;
+    padding: 45px;
     box-shadow: 0 0 10px 2px;
+  }
+
+  .question-font {
+    font-size: xx-large;
   }
   
   .btn-grid {
@@ -58,12 +63,13 @@
   
   .btn {
     --hue: var(--hue-neutral);
-    border: 1px solid hsl(var(--hue), 100%, 30%);
-    background-color: hsl(var(--hue), 100%, 50%);
+    border: 1px solid hsl(var(--hue), 40%, 30%);
+    background-color: hsl(var(--hue), 50%, 60%);
     border-radius: 5px;
     padding: 5px 10px;
     color: white;
     outline: none;
+    font-size: 14px;
   }
   
   .btn:hover {
@@ -82,7 +88,10 @@
   .start-btn, .next-btn {
     font-size: 1.5rem;
     font-weight: bold;
-    padding: 10px 20px;
+  }
+
+  .intro {
+    font-size: 70px;
   }
   
   .controls {
@@ -97,6 +106,31 @@
   }
 
   .welcome {
-    font-size: x-large;
     padding: 3%;
+  }
+
+  .shake {
+    animation: shake 0.82s cubic-bezier(.36, .07, .19, .97);
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+  @keyframes shake {
+    10%,
+    90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    20%,
+    80% {
+      transform: translate3d(2px, 0, 0);
+    }
+    30%,
+    50%,
+    70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+    40%,
+    60% {
+      transform: translate3d(4px, 0, 0);
+    }
   }
