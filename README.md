@@ -42,6 +42,14 @@ To start the application, run the following command in main directory:
 ```bash
 serve
 ```
+Then view the app on the correct local port
+
+## Testing
+
+To test the app, run 
+```bash
+npm test
+```
 
 ## Technologies Used
 
