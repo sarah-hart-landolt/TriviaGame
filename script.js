@@ -17,7 +17,13 @@ const questionElement = document.getElementById("question");
 const counterElement = document.getElementById("counter");
 const answerButtonsElement = document.getElementById("answer-buttons");
 const answerStatus = document.getElementById("answerStatus");
-const img= "https://images.squarespace-cdn.com/content/v1/53d8799de4b0873b56402a1e/1559931009629-ZCSE1FI8ND2P026OM8N8/ke17ZwdGBToddI8pDm48kAx672TVZdoJFcgHFa0Fgil7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0kMlYkjvFlctRdmAM11rxFSGHCfTYI-s7LnXwRZty7HxXSqouQeTz_nGqpH0fE6vjA/proud.jpeg"
+
+const hide = (variableName) => {
+  variableName.classList.add("hide");
+};
+const show = (variableName) => {
+  variableName.classList.remove("hide");
+};
 
 
 let shuffledQuestions = [];
@@ -39,13 +45,7 @@ getData().then(() => {
     answerStatus.classList.add("hide");
   });
 
-  const hide = (variableName) => {
-    variableName.classList.add("hide");
-  };
-  const show = (variableName) => {
-    variableName.classList.remove("hide");
-  };
-
+  
   function startGame() {
     hide(startButton);
     hide(scoreButton);
@@ -116,15 +116,15 @@ getData().then(() => {
       show(nextButton);
     } else {
       startButton.innerText = "Restart";
-      scoreButton.innerText = getScore();
+      scoreButton.innerText = getScore(score);
       show(scoreButton);
       show(startButton);
       hide(welcomeScreen);
     }
   }
 
-  function getScore() {
-    return `Your total score: ${(score / 10) * 100}%`;
+  function getScore(number) {
+    return `Your total score: ${(number / 10) * 100}%`;
   }
 
   function setStatusClass(element, correct) {
