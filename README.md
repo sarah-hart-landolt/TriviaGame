@@ -45,15 +45,14 @@ serve
 
 ## Technologies Used
 
-[Bootstrap](https://reactjs.org/)
+[Bootstrap](https://getbootstrap.com/) for speedy styling
 
-[Jest](https://reactstrap.github.io/) for speedy styling
+[Jest](https://jestjs.io/en/) for testing
 
 
 
 ## Other Goodies
 ![My Emotions Art](./images/happy.png)
-## ERD
 
 ## Sarah Hart Art Info
 
