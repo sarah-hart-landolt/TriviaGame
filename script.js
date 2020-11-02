@@ -6,9 +6,11 @@ import {
   tenRandomTriviaItems,
 } from "./provider.js";
 
+import {alert} from "./alert.js"
+
 const welcomeScreen = document.getElementById("welcome");
 const startButton = document.getElementById("start-btn");
-const scoreButton = document.getElementById("score-btn");
+const scoreButton = document.getElementById("score");
 const nextButton = document.getElementById("next-btn");
 const questionContainerElement = document.getElementById("question-container");
 const questionElement = document.getElementById("question");
@@ -99,12 +101,10 @@ getData().then(() => {
     if (correct) {
       score++;
       console.log(score);
-      answerStatus.innerText = "Correct Answer! Good Job!";
-
+      answerStatus.innerHTML = alert("correct");
     } else {
-      selectedButton.classList.add("shake")
-      answerStatus.innerText =
-        "Incorrect Answer. You should do better! Shame on you!";
+      selectedButton.classList.add("shake");
+      answerStatus.innerHTML = alert("incorrect");
     }
     show(answerStatus);
 
