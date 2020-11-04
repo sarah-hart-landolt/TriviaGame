@@ -5,6 +5,8 @@ const triviaItems = require("./mocks");
 const getScore = require("./mocks");
 const answerButton = require("./mocks");
 const triviaItemTest = require("./mocks");
+const alert = require("./mocks");
+
 
 
 
@@ -82,3 +84,16 @@ test("Test that Trivia Item Function returns correct amount of buttons ", () => 
   triviaItemTest.seventhPlace(triviaItem1, questionElement, answerButtonsElement)
   expect(Array.from(answerButtonsElement.children).length).toEqual(4);
 });
+
+
+test("Test that alert gives incorrect answer status", () => {
+  document.body.innerHTML =
+  `<div id="answerStatus" class="hide welcome">Correct/Incorrect</div>`
+
+  const answerStatus= document.getElementById("answerStatus")
+  answerStatus.innerHTML = alert.eightPlace("incorrect");
+ 
+  expect(answerStatus.innerHTML).toContain("Incorrect Answer. But don't be too frustrated!")
+
+
+})

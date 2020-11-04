@@ -1,4 +1,8 @@
 
+ /*
+ This component holds the functions that manipulate the classes of the DOM
+  */
+
 export const hide = (variableName) => {
     variableName.classList.add("hide");
   };

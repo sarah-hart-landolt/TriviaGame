@@ -1,3 +1,8 @@
+/*
+ This component holds the functions that render the correct questions and shuffled answers 
+ of a new trivia item
+*/
+
 import {
     shuffleAnswers,
     getAllAnswers

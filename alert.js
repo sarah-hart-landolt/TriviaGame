@@ -1,3 +1,7 @@
+/*
+ This component holds the function to set the proper alert to judge if an answer is correct/ incorrect
+*/
+
 export const alert = (variableName) => {
     if (variableName === "correct") {
       return `

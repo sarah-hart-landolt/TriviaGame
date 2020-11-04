@@ -1,3 +1,9 @@
+/*
+ This component:
+ 1) fetches the data froms JSON and parses it
+ 2) has functions to be exported that properly manipulate that data (select 10 random, create an answer array)
+*/
+
 let data = []
 
 export const getData = () => {
