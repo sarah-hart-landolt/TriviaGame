@@ -2,7 +2,7 @@
 
 Trivia Game is an app created for the Tandem Apprenticeship coding challenge. 
 
-# For Tandem Reviewers of This Challenge:
+## For Tandem Reviewers of This Challenge:
 I completed all the necessary requirements by the due date on November 1, 2020. Yet, I have since added a few more tests and abstractions for my own refinement and learning. To see the repository at cut off at that deadline, click [here](https://github.com/sarah-hart-landolt/TriviaGame/tree/710a04fef19af285d2b224eac48c025fb6020719)
 
 
@@ -10,7 +10,7 @@ I completed all the necessary requirements by the due date on November 1, 2020. 
 ![](./images/IncorrectAnswer.png)
 
 
-# Rules of the challenge: 
+## Rules of the challenge: 
 
 "Your goal is to create an application that displays trivia questions with multiple-choice answers to select
 from."
