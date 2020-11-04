@@ -10,6 +10,9 @@ import {alert} from "./alert.js"
 
 import {hide, show,setStatusClass, resetState } from "./classHelpers.js"
 
+
+
+
 const welcomeScreen = document.getElementById("welcome");
 const startButton = document.getElementById("start-btn");
 const scoreButton = document.getElementById("score");

@@ -138,7 +138,28 @@ const triviaItems =
     return `Your total score: ${(score / 10) * 100}%`;
   }
 
-  
+  const answerButton = (answer, question) => {
+    if(answer === question.correct){
+        return `<button id="answerButton" class="btn yes">${answer}</button>`    
+    } else {
+        return `<button id="answerButton" class="btn no">${answer}</button>`    
+
+    }
+}
+
+
+
+ const triviaItemTest = (oneTrivia, questionElement, answerButtonsElement) => {
+  const allAnswers = getAllAnswers(oneTrivia);
+  const shuffleAllAnswers = shuffleAnswers(allAnswers);
+  questionElement.innerText = oneTrivia.question 
+  shuffleAllAnswers.map(answer =>{
+      answerButtonsElement.innerHTML += answerButton(answer, oneTrivia)
+
+  })
+
+}
+
 
 
 module.exports.firstPlace = shuffleAnswers
@@ -146,5 +167,9 @@ module.exports.secondPlace = getAllAnswers
 module.exports.thirdPlace = tenRandomTriviaItems
 module.exports.fourthPlace= triviaItems
 module.exports.fifthPlace= getScore
+module.exports.sixthPlace=answerButton
+module.exports.seventhPlace=triviaItemTest
+
+
 
 
