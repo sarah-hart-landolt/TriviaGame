@@ -22,7 +22,7 @@ const answerButton = (answer, question) => {
     if(answer === question.correct){
         return `<button id="answerButton" class="btn yes">${answer}</button>`    
     } else {
-        return `<button id="answerButton" class="btn no">${answer}</button>`    
+        return ` <button id="answerButton" class="btn no">${answer}</button>`    
 
     }
 }
