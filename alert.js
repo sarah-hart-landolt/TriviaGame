@@ -12,7 +12,7 @@ export const alert = (variableName) => {
     <img src="./images/happy.png" alt="Happy Emotion Sarah Hart Landolt painting" width="115" height="150">
     </div>
   `;
-    } else {
+    } else if (variableName === "incorrect"){
       return `
     <div class="alert alert-warning" role="alert">
   <h4 class="alert-heading">Oops!</h4>
@@ -21,5 +21,15 @@ export const alert = (variableName) => {
   <img src="./images/frustrated.png" alt="Frustrated Emotion Sarah Hart Landolt painting" width="115" height="150">
 </div>
 `;
+    } else {
+        return `
+        <div class="alert alert-warning" role="alert">
+      <h4 class="alert-heading">Times Up!</h4>
+      <hr>
+      <p>Incorrect Answer. But don't be too mad! </p>
+      <img src="./images/frustrated.png" alt="Frustrated Emotion Sarah Hart Landolt painting" width="115" height="150">
+    </div>
+    `;
+
     }
   };
