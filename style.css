@@ -109,6 +109,21 @@
     padding: 3%;
   }
 
+  .countdown {
+    background-color: deeppink;
+    color: white;
+  }
+
+  .countdown-stop {
+    background-color: #66ccad;
+    color: white;
+
+  }
+
+  #timer {
+    width: 40px;
+  }
+
   .shake {
     animation: shake 0.82s cubic-bezier(.36, .07, .19, .97);
     transform: translate3d(0, 0, 0);
