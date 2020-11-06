@@ -23,11 +23,11 @@ export const alert = (variableName) => {
 `;
     } else {
         return `
-        <div class="alert alert-warning" role="alert">
+        <div class="alert alert-danger" role="alert">
       <h4 class="alert-heading">Times Up!</h4>
       <hr>
-      <p>Incorrect Answer. But don't be too mad! </p>
-      <img src="./images/frustrated.png" alt="Frustrated Emotion Sarah Hart Landolt painting" width="115" height="150">
+      <p>You ran out of time! But don't be too disappointed! </p>
+      <img src="./images/disappointed.png" alt="Frustrated Emotion Sarah Hart Landolt painting" width="115" height="150">
     </div>
     `;
 

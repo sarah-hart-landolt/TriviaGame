@@ -14,7 +14,7 @@ const questionContainerElement = document.getElementById("question-container");
 const counterElement = document.getElementById("counter");
 const answerButtonsElement = document.getElementById("answer-buttons");
 const answerStatus = document.getElementById("answerStatus");
-const seconds = document.querySelector("#countdown");
+const timer = document.getElementById("timer")
 
 // initialize variables
 let shuffledTriviaItems = [];
@@ -25,21 +25,49 @@ getData().then(() => {
   const data = useData();
 
   let randomArray = [];
-  let second = 10;
+  var c = 10;
+  var t;
+  var timer_is_on = 0;
 
-  const resetSeconds = ()=> {
-    second = 10; 
-  }
+function timedCount() {
+  timer.value = c;
 
-  const countdown = () => {
-    seconds.textContent = second + " second" + (second == 1 ? "" : "s");
-    if (second-- > 0) setTimeout(countdown, 1000);
-    if (seconds.innerText === "0 seconds") {
+  if(c>0){
+    c = c - 1;
+  } else {
+    clearTimeout(t);
+    timer_is_on= 1
       disable();
-      answerStatus.innerHTML = alert("timesup");
+      answerStatus.innerHTML = alert("times up")
       gameStatusCheck();
+     
     }
-  };
+  
+  t = setTimeout(timedCount, 1000);
+  
+
+}
+
+
+function startCount() {
+  if (!timer_is_on) {
+    timer_is_on = 1;
+     timedCount();
+  }
+}
+
+function stopCount() {
+  clearTimeout(t);
+  timer_is_on = 0;
+}
+
+function disable() {
+  Array.from(answerButtonsElement.children).forEach((button) => {
+    button.disabled = true;
+    setStatusClass(button);
+    show(answerStatus);
+  });
+}
 
   // generate 10 random questions from data, create a new array
   tenRandomTriviaItems(data, randomArray);
@@ -80,23 +108,22 @@ getData().then(() => {
   function setNextQuestion() {
     // clear the following state of questions/answers/button
     resetState(nextButton, answerButtonsElement);
+    timer.classList.add("countdown")
+    c=10;
+
+    timer.classList.remove("countdown-stop")
+
     // show the question at the incremented index
     showQuestion(shuffledTriviaItems[currentTriviaItemIndex]);
-  }
+    startCount();
 
-  function disable() {
-    Array.from(answerButtonsElement.children).forEach((button) => {
-      button.disabled = true;
-      setStatusClass(button);
-      show(answerStatus);
-    });
-  }
 
-  const stopSeconds = () => {
-    seconds.innerText=second;
-    console.log(second)
 
   }
+
+ 
+
+  
 
   function showQuestion(question) {
     // set the question counter to let the user know which question it is of 10
@@ -105,14 +132,20 @@ getData().then(() => {
     triviaItem(question);
     // adds an event listener to every answer button
     answerButtonsElement.addEventListener("click", selectAnswer);
-    answerButtonsElement.addEventListener("click", stopSeconds);
+  
 
-    resetSeconds();
-    countdown();
+    // countdown();
   }
+
+ 
 
   function selectAnswer(e) {
     const selectedButton = e.target;
+    stopCount()
+    timer.classList.remove("countdown")
+
+    timer.classList.add("countdown-stop")
+
     // is the selectedButton the correct answer
     const correct = selectedButton.classList.contains("yes");
     // if it's correct, add one to score, set alert to correct
